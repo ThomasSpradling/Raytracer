@@ -13,31 +13,33 @@ We use a layer-based architecture where the top layer depends on lower layers wh
 
 ## Roadmap
 
-Items with a (*) are initially of lower priority and should be done last.
+## Roadmap
 
-[ ] CPU Whitted Ray-tracer
-    [ ] Set up platform layer with window creation and input handling
-    [ ] Set up low-level Vulkan render directly to render a drawn-to image directly into swap-chain
-    [ ] User interface and runtime controls
-    [ ] Basic renderer which accumulates samples over time to converge to the correct image
-    [ ] Handle several intersection methods against a `ray` interface
-        [ ] Sphere
-        [ ] Plane
-        [ ] *Parametric Surfaces
-        [ ] *Triangle Mesh
-    [ ] Create scene graph hiearchy of items and camera to shoot initial rays
-    [ ] Support more complicated materials
-        [ ] Pure diffuse
-        [ ] Pure reflective
-        [ ] General dielectric materials with the Frensel equations
-        [ ] Support Beer's law
-    [ ] *More complicated light
-        [ ] *Spot lights
-        [ ] *Directional lights
-    [ ] *Support barrel distortion and fish-eye lens
-    [ ] *Texturing
-    [ ] *Postprocessing
-        [ ] *Gamma correction
-        [ ] *Vignette
-        [ ] *Chromatic aberration
-    [ ] *Multi-threaded rendering system
+Items marked with (*) are lower priority and should be tackled last.
+
+- [ ] CPU Whitted Ray-tracer
+  - [ ] Set up platform layer (window creation + input handling)
+  - [ ] Add low-level Vulkan presenter that blits a rendered image into the swap-chain
+  - [ ] Implement user interface and runtime controls
+  - [ ] Basic renderer that accumulates samples over time until convergence
+  - [ ] Intersection routines for the `Ray` interface  
+        - [ ] Sphere  
+        - [ ] Plane  
+        - [ ] *Parametric surfaces  
+        - [ ] *Triangle mesh
+  - [ ] Scene-graph hierarchy (objects + camera that emits primary rays)
+  - [ ] Richer materials
+        - [ ] Pure diffuse  
+        - [ ] Pure reflective  
+        - [ ] Dielectric (Fresnel)  
+        - [ ] Beer’s-law absorption
+  - [ ] *More complex lights  
+        - [ ] Spot lights  
+        - [ ] Directional lights
+  - [ ] *Barrel distortion & fish-eye lens
+  - [ ] *Texturing
+  - [ ] *Post-processing  
+        - [ ] *Gamma correction  
+        - [ ] *Vignette  
+        - [ ] *Chromatic aberration
+  - [ ] *Multi-threaded rendering system
