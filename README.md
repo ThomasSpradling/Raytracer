@@ -32,7 +32,7 @@ Items marked with (*) are lower priority and should be tackled last.
         - [ ] Pure diffuse  
         - [ ] Pure reflective  
         - [ ] Dielectric (Fresnel)  
-        - [ ] Beer’s-law absorption
+        - [ ] Beer’s law absorption
     - [ ] *More complex lights  
         - [ ] *Spot lights  
         - [ ] *Directional lights
