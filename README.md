@@ -18,22 +18,23 @@ We use a layer-based architecture where the top layer depends on lower layers wh
 Items marked with (*) are lower priority and should be tackled last.
 
 - [ ] CPU Whitted Ray-tracer
-    - [ ] Set up platform layer (window creation + input handling)
-    - [ ] Add low-level Vulkan presenter that blits a rendered image into the swap chain
+    - [x] Set up platform layer (window creation + input handling)
+    - [x] Add low-level Vulkan presenter that blits a rendered image into the swap chain
     - [ ] Implement user interface and runtime controls
-    - [ ] Basic renderer that accumulates samples over time until convergence
+    - [x] Basic renderer that accumulates samples over time until convergence
     - [ ] Intersection routines for the `Ray` interface  
-        - [ ] Sphere
+        - [x] Sphere
         - [ ] Plane  
         - [ ] *Parametric surfaces  
         - [ ] *Triangle mesh
-    - [ ] Scene-graph hierarchy (objects + camera that emits primary rays)
+    - [x] Scene rendering (objects + camera that emits primary rays)
     - [ ] Materials
         - [ ] Pure diffuse  
         - [ ] Pure reflective  
         - [ ] Dielectric (Fresnel)  
         - [ ] Beer’s law absorption
-    - [ ] *More complex lights  
+    - [ ] Lighting
+        - [ ] Point lights  
         - [ ] *Spot lights  
         - [ ] *Directional lights
     - [ ] *Barrel distortion & fish-eye lens

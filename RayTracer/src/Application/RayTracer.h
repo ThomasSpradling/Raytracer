@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Backend/GraphicsBackend.h"
-#include "Platform/Window.h"
 #include "Renderer/Renderer.h"
-#include "Backend/VulkanRenderer.h"
+#include "Scene/Scene.h"
 
 namespace Application {
 
@@ -15,9 +14,11 @@ namespace Application {
     public:
         RayTracer(uint32_t video_width, uint32_t video_height);
         void Run();
+        void SetScene(std::shared_ptr<Scene::Scene> scene) { m_scene = scene; }
     private:
         std::unique_ptr<Renderer::Renderer> m_renderer;
         Backend::GraphicsBackend m_graphics_backend;
+        std::shared_ptr<Scene::Scene> m_scene;
     private:
         void Update();
     };

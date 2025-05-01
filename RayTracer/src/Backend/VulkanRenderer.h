@@ -3,7 +3,6 @@
 #include "Backend/Device.h"
 #include "Backend/SwapChain.h"
 #include "Backend/VulkanInstance.h"
-#include "Common/Color.h"
 #include <memory>
 #include <vector>
 

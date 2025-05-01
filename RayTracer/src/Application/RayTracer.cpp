@@ -1,5 +1,6 @@
 #include "RayTracer.h"
 #include "Renderer/Film.h"
+#include "Renderer/WhittedTracer.h"
 #include "Utils/Profiler.h"
 
 namespace Application {
@@ -10,7 +11,7 @@ namespace Application {
         VkExtent2D extent = m_graphics_backend.GetWindow().GetFramebufferExtent();
         VkFormat format = m_graphics_backend.GetVulkanRenderer().SwapChainFormat();
 
-        m_renderer = std::make_unique<Renderer::Renderer>(extent.width, extent.height, format);
+        m_renderer = std::make_unique<Renderer::Renderer>(extent.width, extent.height, format, std::make_unique<Renderer::WhittedTracer>());
     }
 
     void RayTracer::Run() {
@@ -21,9 +22,13 @@ namespace Application {
 
         Utils::Profiler::LogSummary();
     }
-
+    
     void RayTracer::Update() {
-        Renderer::Film &film = m_renderer->RenderToFilm();
+        auto [width, height] = m_graphics_backend.GetWindow().GetFramebufferExtent();
+        m_scene->GetCamera().SetImageSize(width, height);
+        m_scene->GetCamera().Update();
+
+        Renderer::Film &film = m_renderer->RenderToFilm(*m_scene);
 
         m_graphics_backend.GetVulkanRenderer().Present(
             film.Data(),

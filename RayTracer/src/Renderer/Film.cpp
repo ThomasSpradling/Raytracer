@@ -1,6 +1,5 @@
 #include "Film.h"
 #include "Common/Color.h"
-#include "Utils/Profiler.h"
 
 #include <cassert>
 #include <iostream>
