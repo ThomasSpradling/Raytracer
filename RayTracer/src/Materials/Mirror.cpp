@@ -1,13 +1,13 @@
-#include "Materials/Metal.h"
+#include "Materials/Mirror.h"
 #include "Geometry/Ray.h"
 #include "glm/geometric.hpp"
 
 namespace Materials {
-    Metal::Metal(const Color &tint)
+    Mirror::Mirror(const Color &tint)
         : m_tint(tint)
     {}
 
-    Color Metal::Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth) const {
+    Color Mirror::Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth) const {
         if (depth == 0) return Color(0);
 
         glm::vec3 reflected_dir = glm::normalize(glm::reflect(in_ray.Direction(), intersection.normal));

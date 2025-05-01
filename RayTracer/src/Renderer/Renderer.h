@@ -21,7 +21,7 @@ namespace Renderer {
         std::unique_ptr<Tracer> m_tracer;
 
         uint32_t m_current_offset = 0;
-        static constexpr uint32_t SAMPLES_PER_FRAME = 500;
+        static constexpr uint32_t SAMPLES_PER_FRAME = 10000;
         std::vector<uint32_t> random_indices {};
     };
 

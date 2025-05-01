@@ -24,17 +24,17 @@ Items marked with (*) are lower priority and should be tackled last.
     - [x] Basic renderer that accumulates samples over time until convergence
     - [ ] Intersection routines for the `Ray` interface  
         - [x] Sphere
-        - [ ] Plane  
+        - [ ] Plane
         - [ ] *Parametric surfaces  
         - [ ] *Triangle mesh
     - [x] Scene rendering (objects + camera that emits primary rays)
     - [ ] Materials
-        - [ ] Pure diffuse  
-        - [ ] Pure reflective  
+        - [x] Pure diffuse  
+        - [x] Pure reflective
         - [ ] Dielectric (Fresnel)  
         - [ ] Beer’s law absorption
     - [ ] Lighting
-        - [ ] Point lights  
+        - [x] Point lights  
         - [ ] *Spot lights  
         - [ ] *Directional lights
     - [ ] *Barrel distortion & fish-eye lens

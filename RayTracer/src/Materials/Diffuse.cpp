@@ -10,7 +10,7 @@ namespace Materials {
     {}
 
     Color Diffuse::Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int) const {
-        return m_albedo;
+        return m_albedo * scene.DirectIllumination(intersection.point, intersection.normal);
     }
 
 }

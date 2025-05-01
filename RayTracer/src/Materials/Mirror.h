@@ -8,9 +8,9 @@
 
 namespace Materials {
 
-    class Metal : public Material {
+    class Mirror : public Material {
     public:
-        Metal(const Color &tint);
+        Mirror(const Color &tint);
         virtual Color Shade(const Geometry::Intersection& intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth = 0) const;
     private:
         Color m_tint;
