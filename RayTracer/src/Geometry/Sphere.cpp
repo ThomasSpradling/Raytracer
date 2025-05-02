@@ -37,12 +37,7 @@ namespace Geometry {
         glm::vec3 point = ray(time);
         glm::vec3 normal = glm::normalize(point - m_center);
 
-        return Intersection{
-            .time = time,
-            .normal = normal,
-            .point = point,
-            .material = m_material,
-        };
+        return Intersection(ray, point, normal, time, m_material);
     }
 
 }

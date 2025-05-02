@@ -40,6 +40,8 @@ namespace Scene {
         }
 
         Color DirectIllumination(const glm::vec3 &point, const glm::vec3 &normal) const;
+
+        static Color GetAmbientColor() { return { 0.3f, 0.3f, 0.3f, 1.0f }; }
     private:
         std::shared_ptr<Camera> m_camera;
         Geometry::PrimitiveList m_primitive_list;

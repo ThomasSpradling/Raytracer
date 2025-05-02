@@ -16,7 +16,7 @@ namespace Scene {
         glm::vec3 direction = m_position - point;
 
         float effective_incident = glm::max(0.0f, glm::dot(glm::normalize(direction), normal));
-        float falloff  = 1.0f / (1.0f + 0.001f * glm::dot(direction, direction));
+        float falloff  = 1.0f / (1.0f + m_attenuation * glm::dot(direction, direction));
 
         return intensity * effective_incident * falloff;
     }

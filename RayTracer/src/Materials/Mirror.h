@@ -11,7 +11,7 @@ namespace Materials {
     class Mirror : public Material {
     public:
         Mirror(const Color &tint);
-        virtual Color Shade(const Geometry::Intersection& intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth = 0) const;
+        virtual Color Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth = 0) const;
     private:
         Color m_tint;
     };

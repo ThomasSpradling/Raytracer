@@ -9,7 +9,7 @@ namespace Materials {
     class Diffuse : public Material {
     public:
         Diffuse(const Color &albedo);
-        virtual Color Shade(const Geometry::Intersection& intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int) const;
+        virtual Color Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int) const;
     private:
         Color m_albedo;
     };
