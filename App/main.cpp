@@ -17,7 +17,7 @@ int main() {
         Materials::Glossy green ({0.1f, 0.8f, 0.1f, 1.0f}, 0.1f);
         Materials::Glossy blue  ({0.1f, 0.0f, 0.8f, 1.0f}, 0.1f);
 
-        Materials::Dielectric glass (1.5f);
+        Materials::Dielectric glass (1.5f, 0.1f, 0.2f);
         glass.SetAbsorption(0.1f);
         Materials::Dielectric air (1.0f / 1.5f);
         air.SetAbsorption(0.0f);

@@ -28,11 +28,11 @@ Items marked with (*) are lower priority and should be tackled last.
         - [ ] *Parametric surfaces  
         - [ ] *Triangle mesh
     - [x] Scene rendering (objects + camera that emits primary rays)
-    - [ ] Materials
+    - [x] Materials
         - [x] Pure diffuse  
         - [x] Pure reflective
-        - [ ] Dielectric (Fresnel)  
-        - [ ] Beer’s law absorption
+        - [x] Dielectric (Fresnel)  
+        - [x] Beer’s law absorption
     - [ ] Lighting
         - [x] Point lights  
         - [ ] *Spot lights  

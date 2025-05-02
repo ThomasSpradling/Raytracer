@@ -7,10 +7,8 @@
 #include <glm/gtx/norm.hpp> 
 
 namespace Materials {
-    Dielectric::Dielectric(float index_of_refraction, const Color &reflected_tint, const Color &transmitted_tint, float absorption, float diffuse_ratio, const Color &albedo)
+    Dielectric::Dielectric(float index_of_refraction, float absorption, float diffuse_ratio, const Color &albedo)
         : m_index_of_refraction(index_of_refraction)
-        , m_reflected_tint(reflected_tint)
-        , m_transmitted_tint(transmitted_tint)
         , m_absorption(absorption)
         , m_diffuse_ratio(diffuse_ratio)
         , m_albedo(albedo)
@@ -56,9 +54,6 @@ namespace Materials {
                 // if refraction is impossible, then we reflect entirely
                 reflectance = 1.0f;
             }
-
-            // std::cout << "Reflectance: " << reflectance << std::endl;
-            // reflectance = 0.0f;
 
             result += specular_scale * glm::mix(transmitted_component, reflected_component, reflectance);
         }

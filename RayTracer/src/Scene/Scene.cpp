@@ -19,10 +19,10 @@ namespace Scene {
             } else {
                 if (auto die = dynamic_cast<const Materials::Dielectric*>(blocker->material)) {
                     float eta = 1.0f / die->GetIndexOfRefraction();
-                    float R = die->ComputeReflectance(shadow_ray.Direction(), blocker->normal, eta);
-                    float T_beer = std::exp(-die->GetAbsorption() * blocker->time);
-                    float T = (1.0f - R) * T_beer;
-                    result += T * light->Illuminate(point, normal);
+                    float reflectance = die->ComputeReflectance(shadow_ray.Direction(), blocker->normal, eta);
+                    float beer_falloff = std::exp(-die->GetAbsorption() * blocker->time);
+                    float transmittance = (1.0f - reflectance) * beer_falloff;
+                    result += (die->GetDiffuseRatio() + (1.0f - die->GetDiffuseRatio()) * transmittance) * light->Illuminate(point, normal);
                 }
             }
         }
