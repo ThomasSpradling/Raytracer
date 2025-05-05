@@ -1,6 +1,7 @@
 #include "VulkanRenderer.h"
 #include "Backend/debug.h"
 #include "Backend/utils.h"
+#include "Utils/Profiler.h"
 #include <iostream>
 
 namespace VulkanBackend {
@@ -37,6 +38,7 @@ namespace VulkanBackend {
     }
     
     void VulkanRenderer::Present(const std::vector<uint8_t> &data, uint32_t width, uint32_t height) {
+        PROFILE_FUNCTION_AUTO();
         // Set up imgui for this frame
         
         const PerFrameData &current_frame = m_frame_data[m_current_frame_index];
@@ -60,6 +62,7 @@ namespace VulkanBackend {
             .flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
             .pInheritanceInfo = nullptr,
         };
+        
 
         VK_CHECK(vkBeginCommandBuffer(current_frame.transfer_command_buffer, &command_buffer_begin_info));
             // Record commands to transfer data into swapchain image

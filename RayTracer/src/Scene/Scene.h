@@ -6,6 +6,7 @@
 #include "Geometry/Ray.h"
 #include "Geometry/Primitive.h"
 #include "Scene/PointLight.h"
+#include "Utils/Profiler.h"
 #include <vector>
 
 namespace Scene {
@@ -15,8 +16,12 @@ namespace Scene {
         inline Camera &GetCamera() { return *m_camera; }
         inline void SetCamera(std::shared_ptr<Camera> camera) { m_camera = camera; }
 
-        inline void Add(std::unique_ptr<Geometry::Primitive> primitive) { m_primitive_list.Add(std::move(primitive)); }
-        
+        template<typename T>
+        inline void Add(std::unique_ptr<T> primitive) {
+            static_assert(std::is_base_of_v<Geometry::Primitive, T>, "T must derive from Primitive");
+            m_primitive_list.Add(std::move(primitive));
+        }
+
         template <class T, class... Args>
         void Add(Args &&...args) {
             static_assert(std::is_base_of_v<Geometry::Primitive, T>, "T must derive from Primitive");
@@ -26,12 +31,12 @@ namespace Scene {
         inline std::optional<Geometry::Intersection> IntersectNearest(
             const Geometry::Ray &ray, 
             float tmin = 0,
-            float tmax = std::numeric_limits<float>::infinity()) const { return m_primitive_list.IntersectNearest(ray, tmin, tmax); };
+            float tmax = std::numeric_limits<float>::infinity()) const { PROFILE_FUNCTION_AUTO(); return m_primitive_list.IntersectNearest(ray, tmin, tmax); };
 
         inline std::optional<Geometry::Intersection> IntersectAny(
             const Geometry::Ray &ray, 
             float tmin = 0,
-            float tmax = std::numeric_limits<float>::infinity()) const { return m_primitive_list.IntersectAny(ray, tmin, tmax); };
+            float tmax = std::numeric_limits<float>::infinity()) const { PROFILE_FUNCTION_AUTO(); return m_primitive_list.IntersectAny(ray, tmin, tmax); };
 
         template <class T, class... Args>
         void AddLight(Args &&...args) {
@@ -41,7 +46,7 @@ namespace Scene {
 
         Color DirectIllumination(const glm::vec3 &point, const glm::vec3 &normal) const;
 
-        static Color GetAmbientColor() { return { 0.3f, 0.3f, 0.3f, 1.0f }; }
+        static Color GetAmbientColor() { return { 0.1f, 0.1f, 0.1f, 1.0f }; }
     private:
         std::shared_ptr<Camera> m_camera;
         Geometry::PrimitiveList m_primitive_list;

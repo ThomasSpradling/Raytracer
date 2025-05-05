@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Dependencies
 
+add_compile_definitions(STRONK_RESOURCE_PATH="${CMAKE_SOURCE_DIR}/resources")
+
 find_package(Vulkan REQUIRED)
 
 ## GLFW

@@ -15,11 +15,14 @@ namespace Renderer {
 
         void PutColor(uint32_t i, uint32_t j, const Color &color);
         void Fill(const Color &color);
+
+        void WriteToImage(const std::string &output_path);
         
     private:
         enum class Layout { RGBA, BGRA };
         constexpr static uint32_t CHANNEL_COUNT = 4;
 
+        std::vector<Color> m_accum;
         std::vector<uint8_t> m_data {};
         VkFormat m_format;
         uint32_t m_width {};

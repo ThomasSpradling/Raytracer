@@ -12,7 +12,10 @@ namespace Application {
      */
     class RayTracer {
     public:
-        RayTracer(uint32_t video_width, uint32_t video_height);
+        RayTracer(uint32_t video_width, uint32_t video_height, uint32_t samples_per_pixel);
+        inline void SetOutputPath(const std::string &path) { m_output_path = path; }
+        inline void SetNoGui(bool value) { m_no_gui = value; }
+
         void Run();
         void SetScene(std::shared_ptr<Scene::Scene> scene) { m_scene = scene; }
     private:
@@ -21,6 +24,8 @@ namespace Application {
         std::shared_ptr<Scene::Scene> m_scene;
     private:
         void Update();
+        std::string m_output_path = "";
+        bool m_no_gui = false;
     };
 
 }

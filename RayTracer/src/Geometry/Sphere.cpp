@@ -1,14 +1,16 @@
 #include "Geometry/Sphere.h"
 #include "Geometry/Intersections.h"
+#include "Geometry/Primitive.h"
+#include "glm/ext/scalar_constants.hpp"
 #include <cmath>
 #include <iostream>
 
 namespace Geometry {
 
-    Sphere::Sphere(const glm::vec3 &center, float radius, const Materials::Material *material) 
+    Sphere::Sphere(const glm::vec3 &center, float radius, std::shared_ptr<Materials::Material> material) 
         : m_center(center)
         , m_radius(radius)
-        , m_material(material)
+        , Primitive(material)
     {}
 
     std::optional<Intersection> Sphere::Intersect(const Ray &ray, float tmin, float tmax) const {
@@ -37,7 +39,16 @@ namespace Geometry {
         glm::vec3 point = ray(time);
         glm::vec3 normal = glm::normalize(point - m_center);
 
-        return Intersection(ray, point, normal, time, m_material);
+        float phi = std::atan2(normal.z, normal.x);
+        if (phi < 0) phi += 2 * glm::pi<float>();
+            float theta = std::acos(glm::clamp(normal.y, -1.0f, 1.0f));
+
+        glm::vec2 uv {
+            phi / (2 * glm::pi<float>()),
+            theta / glm::pi<float>()
+        };
+
+        return Intersection(ray, point, normal, uv, time, m_material.get());
     }
 
 }

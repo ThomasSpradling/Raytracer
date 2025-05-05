@@ -11,7 +11,7 @@ namespace Geometry {
     
     class Sphere : public Primitive {
     public:
-        Sphere(const glm::vec3 &center, float radius, const Materials::Material *material);
+        Sphere(const glm::vec3 &center, float radius, std::shared_ptr<Materials::Material> material);
         virtual std::optional<Intersection> Intersect(
             const Ray &ray,
             float tmin = 0,
@@ -19,7 +19,6 @@ namespace Geometry {
     private:
         glm::vec3 m_center;
         double m_radius;
-        const Materials::Material *m_material;
     };
 
 }

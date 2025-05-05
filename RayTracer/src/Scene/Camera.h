@@ -9,13 +9,14 @@ namespace Scene {
     class Camera {
     public:
         Camera(
-            const glm::vec3 &center = glm::vec3(0.0f),
-            const glm::vec3 &direction = glm::vec3(0.0f, 0.0f, -1.0f),
+            const glm::vec3 &look_from = glm::vec3(0.0f),
+            const glm::vec3 &look_at = glm::vec3(0.0f, 0.0f, -1.0f),
             float field_of_view = 45.0f,
-            float focal_length = 1.0f,
-            const glm::vec3 &up = { 0, 1, 0 });
+            const glm::vec3 &up = { 0, 1, 0 },
+            float focal_length = 1.0f
+        );
         void SetImageSize(uint32_t width, uint32_t height) { m_image_size = { width, height }; }
-        Geometry::Ray GenerateRay(uint32_t u, uint32_t v);
+        Geometry::Ray GenerateRay(float u, float v);
         void Update();
     private:
         glm::ivec2 m_image_size { 0, 0 };

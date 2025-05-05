@@ -1,8 +1,13 @@
 #include "Film.h"
 #include "Common/Color.h"
 
+#include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <stdexcept>
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image_write.h>
 
 namespace Renderer {
 
@@ -71,6 +76,37 @@ namespace Renderer {
         const size_t word_count = m_data.size() / 4;
         auto* dest = reinterpret_cast<uint32_t*>(m_data.data());
         std::fill_n(dest, word_count, pixel);
+    }
+
+    void Film::WriteToImage(const std::string &output_path) {
+        std::cout << "writing to image" << std::endl;
+        std::cout << "Dimensions: " << m_width << " x " << m_height << std::endl;
+
+        std::vector<uint8_t> rgba;
+        rgba.resize(m_width * m_height * CHANNEL_COUNT);
+
+        if (m_layout == Layout::RGBA) {
+            std::copy(m_data.begin(), m_data.end(), rgba.begin());
+        } else {
+            for (size_t i = 0; i < m_data.size(); i += CHANNEL_COUNT) {
+                rgba[i + 0] = m_data[i + 2];
+                rgba[i + 1] = m_data[i + 1];
+                rgba[i + 2] = m_data[i + 0];
+                rgba[i + 3] = m_data[i + 3];
+            }
+        }
+
+        int stride = m_width * CHANNEL_COUNT;
+        if (!stbi_write_png(
+            output_path.c_str(),
+            static_cast<int>(m_width),
+            static_cast<int>(m_height),
+            CHANNEL_COUNT,
+            rgba.data(),
+            stride
+        )) {
+            throw std::runtime_error("Film::WriteToImage: Failed to write to path, " + output_path);
+        }
     }
 
     uint32_t Film::Index(uint32_t i, uint32_t j, uint32_t c) const {

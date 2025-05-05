@@ -8,12 +8,12 @@ namespace Materials {
 
     class Glossy : public Material {
     public:
-        Glossy(const Color &albedo, float specularity = 1.0f, const glm::vec3 &tint = glm::vec3(1.0f));
+        Glossy(const Color &albedo, float specularity = 1.0f, const Color &tint = Color(1.0f));
         virtual Color Shade(const Geometry::Intersection &intersection, const Scene::Scene &scene, const Geometry::Ray &in_ray, const Renderer::Tracer &tracer, int depth) const;
     private:
         Color m_albedo;
         float m_specularity;
-        glm::vec3 m_tint;
+        Color m_tint;
     };
 
 }

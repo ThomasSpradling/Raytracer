@@ -1,12 +1,13 @@
 #include "Camera.h"
+#include "Utils/Profiler.h"
 #include "glm/geometric.hpp"
 #include <cmath>
 
 namespace Scene {
 
-    Camera::Camera(const glm::vec3 &center, const glm::vec3 &direction, float field_of_view, float focal_lengths, const glm::vec3 &up)
-        : m_center(center)
-        , m_direction(direction)
+    Camera::Camera(const glm::vec3 &look_from, const glm::vec3 &look_at, float field_of_view, const glm::vec3 &up, float focal_lengths)
+        : m_center(look_from)
+        , m_direction(glm::normalize(look_at - look_from))
         , m_field_of_view(field_of_view)
         , m_focal_length(focal_lengths)
         , m_up(up)
@@ -14,12 +15,14 @@ namespace Scene {
         Update();
     }
     
-    Geometry::Ray Camera::GenerateRay(uint32_t u, uint32_t v) {
+    Geometry::Ray Camera::GenerateRay(float u, float v) {
+        PROFILE_FUNCTION_AUTO();
+
         // For now, assume no multi-sampling
 
         glm::vec3 film_location = m_top_left_pixel
-            + static_cast<float>(u) * m_delta_u
-            + static_cast<float>(v) * m_delta_v;
+            + u * m_delta_u
+            + v * m_delta_v;
         
         return {
             m_center,
